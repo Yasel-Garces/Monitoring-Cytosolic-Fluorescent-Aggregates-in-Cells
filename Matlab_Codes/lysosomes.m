@@ -1,24 +1,24 @@
-% For a image sequences, this function do the segmentation for each images
-% of the sequence (each image represent a time)
+% This function do the segmentation for each image in a video
+% (each image represent a time)
 % INPUT:
-%      path: The directory of the images of the mCherry channel.
+%      path: The directory of the images of the mCherry/Venus channel.
 %      files: List with the names of the images in this path.
-%      mask: mask image
+%      mask: mask of the image
 % OUTPUT:
 %     result: Matrix with the information about the lysosomes
 %            Time_Img: Time that the image was taken.
 %            Number_cell_I: Number of the cell in the image (each cell contains many lysosomes).
 %            Threshold_cell_I: Threshold for the cell.
 %            Number_I: Number of the lysosomes in the cell, each lysosomes
-%            was identified by a number.
+%            was identified by an id.
 %            Area_I: Area of the lysosome.
 %            Perimeter_I: Perimeter of the lysosome.
 %            Centroid_I_X: X coordinate of the centroid of the lysosome.
 %            Centroid_I_Y: Y coordinate of the centroid of the lysosome.
-%            Mcherry_Mean: Mean of the intensity of the lysosome.
+%            Mean: Mean of the intensity of the lysosome.
 %      Arcs: Position of each lysosome in the image per cell. Each row
 %      represent one image and each column one cell in the image.
-% AUTHOR: Yasel Garcés (88yasel@gmail.com) (29/07/2016)
+% AUTHOR: Yasel Garces (88yasel@gmail.com)
 
 function [result,Arcs]=lysosomes(path,files,mask)
 
@@ -29,7 +29,7 @@ Time_Img=[];
 
 % Analysis of each images of the sequence
 for i=1:length(files)
-    % Read a specif image
+    % Read the image
     image=imread(char(strcat(path,files(i))));
     % Analysis of each cell in an image
     for j=1:max_cells
@@ -42,9 +42,9 @@ for i=1:length(files)
         % Save the number of the cell
         Number_cell{j}=repmat(j,1,length(Number_l{j}));
     end
-    % It merges the information of all cells in objects of type cell array. The
-    % elements of the cell array represent the information of one specific
-    % time of the study.
+    % Merge the information of all cells in objects of type cell array. The
+    % elements of the cell array represents the information of one specific
+    % time.
     Number_cell_I{i}=cell2mat(Number_cell);
     Threshold_cell_I{i}=cell2mat(threshold);
     Time_Img=[Time_Img; repmat(i,length(Number_cell_I{i}),1)];
@@ -54,7 +54,7 @@ for i=1:length(files)
     Centroid_I{i}=cell2mat(Centroid_l(:));
     Mcherry_Mean_I{i}=cell2mat(Mcherry_Mean);
 end
-% It saves the information of the image sequences in a matrix.
+% Save the information of the image sequences in a matrix.
 Number_cell_I=cell2mat(Number_cell_I)';
 Threshold_cell_I=cell2mat(Threshold_cell_I)';
 Number_I=cell2mat(Number_I)';
@@ -62,7 +62,7 @@ Area_I=cell2mat(Area_I)';
 Perimeter_I=cell2mat(Perimeter_I)';
 Centroid_I=cell2mat(Centroid_I(:));
 Mcherry_Mean_I=cell2mat(Mcherry_Mean_I)';
-% It creates the matrix qith all information (output)
+% It creates the matrix with all the information (output)
 result=[Time_Img, Number_cell_I,Threshold_cell_I, Number_I,...
     Area_I, Perimeter_I, Centroid_I(:,1),Centroid_I(:,2), Mcherry_Mean_I];
 end
