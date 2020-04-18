@@ -1,4 +1,4 @@
-% This function do the segmentation for each image in a video
+% This function do the segmentation of each image in a video
 % (each image represent a time)
 % INPUT:
 %      path: The directory of the images of the mCherry/Venus channel.
@@ -38,7 +38,7 @@ for i=1:length(files)
         % Compute the analysis of a cell, save the results a object of
         % class cell array.
         [Number_l{j},threshold{j}, Area_l{j},Perimeter_l{j},Centroid_l{j},Mcherry_Mean{j},...
-            Arcs{i,j}]=find_lisosomas(image_cells);
+            Arcs{i,j}]=find_lysosomes(image_cells);
         % Save the number of the cell
         Number_cell{j}=repmat(j,1,length(Number_l{j}));
     end

@@ -21,13 +21,13 @@ mask=1-im2single(imread(char(strcat(path_mask,mask))));
 
 % Images sequence for mCherry
 path_mCherry=strcat(path_mask,'mCherry/');
-list_dir=dir(fullfile(path_mCherry,type));
+list_dir=dir(fullfile(path_mCherry,'*.tif'));
 % Load the files for mCherry channel
 files_mCherry={list_dir.name};
 
 % Images sequence for Venus
 path_Venus=strcat(path_mask,'Venus/');
-list_dir=dir(fullfile(path_Venus,type));
+list_dir=dir(fullfile(path_Venus,'*.tif'));
 % Load the files for Venus channel
 files_Venus={list_dir.name};
 %-----------------------------------------------------------

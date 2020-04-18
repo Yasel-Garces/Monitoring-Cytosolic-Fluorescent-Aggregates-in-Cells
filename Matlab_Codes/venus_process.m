@@ -1,4 +1,4 @@
-% This function compute the mean intensity and the integral intensity for
+% This function compute the mean intensity and the integral intensity of
 % each lysosome in the Venus channel.
 % Input:
 %      path_Venus: The directory of the images of the Venus channel.

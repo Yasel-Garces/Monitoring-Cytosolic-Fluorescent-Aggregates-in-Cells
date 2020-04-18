@@ -11,7 +11,7 @@
 % Author: Yasel Garces (88yasel@gmail.com)
 
 function [Number_l,final_threshold,Area_l,Perimeter_l,Centroid_l,Mcherry_Mean,...
-    BW_lis]=find_lisosomas(cell)
+    BW_lis]=find_lysosomes(cell)
 
 % In the image, the pixels differents to zero are store in a vector
 cell_vect=cell(cell~=0);
