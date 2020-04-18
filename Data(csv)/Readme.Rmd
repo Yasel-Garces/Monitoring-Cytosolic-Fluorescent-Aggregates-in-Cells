@@ -1,0 +1,59 @@
+---
+title: "Readme"
+author: "Yasel Garcés"
+date: "1 de agosto de 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+En este documento solo se presenta la estructura de datos de los archivos resultantes del proceso de segmentación de las imágenes de Lisosomas. Solo utilizaremos un archivo de ejemplo. Cualquiera que haga uso de esta información debe de estar previamente autorizado por alguno de los 3 autores principales de este proyecto, las referencias se listan abajo.
+
+[Dr. Vadim Pérez](mailto:vad.perez@gmail.com)
+
+[Dr. Adán Guerrero Cárdenas](mailto:adanog@ibt.unam.mx)
+ 
+[M.Sc. Yasel Garcés Suárez.](mailto:88yasel@gmail.com)
+
+La escala de todas las imágenes (reportado por Dr. Vadim Pérez) es de $0.21 \mu m/px$ y el tamaño de los lisosomas varía entre $[0.1, 1.2] \mu m$.
+
+## Estructura del archivo
+
+Todos los archivos que se han generado como resultado del proceso de segmentación son archivos ".csv". Cada uno de los archivos presenta los resultados específicos para un tipo de experimento, por ejemplo "GR_no_quenching_396.csv".
+
+Vamos a cargar y mostrar las variables y demás puntos importantes con el archivo "GR_no_quenching_396.csv".
+```{r pressure, echo=FALSE}
+datos=read.csv("/home/yasel/TRABAJO/Adan_Lisosomas/Data(csv)/GR_no_quenching/GR_no_quenching_396.csv")
+```
+
+Aquí se muestra las primeras y últimas 6 files del archivo.
+```{r}
+# Primeras 6 filas.
+head(datos)
+# Ultimas 6 filas.
+tail(datos)
+```
+
+Las variables que se usaron para esta investigación se listan y explican abajo.
+```{r}
+# Variables
+str(datos)
+```
+
+<center>
+| Variable | Descripción |
+|:----------------:|:-----------------------------------------------------|
+| Type | Se refiere a dos valores mCherry y Venus. |
+| Time.Img | Se asocia a un identificador por cada una de las imágenes del archivo. Por ejemplo, a la imagen "mcherryt001.tif" se le asocia Time.Img=1, mientras que para "mcherryt005.tif" se le asocia Time.Img=5. |
+| No..Cell | Cada imagen contiene un número k de células, cada célula se ha identificado con un número entero entre 1 y k. |
+| No..Lys. | Cada célula contiene un número n de lisosomas, cada lisosoma se ha indentificado con un número entero entre 1 y n. |
+| Area.Lys. | Area de cada lisosoma. |
+| Perimeter.Lys. | Perímetro de cada lisosoma. |
+| Centroid.Lys..X | Para cada lisosoma se ha calculado el centroide del mismo. Esta variable se refiere a la oordenada X. |
+| Centroid.Lys..Y | Coordenada Y del centroide del lisosoma. |
+| MeanInt.Lys. | Media de la intensidad de los niveles de gris del lisosoma. |
+| Int..Intensity.Lys. | Integral (suma) de la intensidad de los niveles de gris del lisosoma. |
+| Int.over.Area.Lys. | Cálculo de la integral de la intensidad sobre el área del lisosoma. |
