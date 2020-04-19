@@ -10,7 +10,7 @@
 % the sweeping angle to eliminate points in a ellipse.
 % OUTPUT:
 % Points: vector [X Y] whit the points of the ellipse
-% EXAMPLE:
+% Uthor: Yasel Garces (88yasel@gmail.com)
 
 function Points=draw_ellipse(parameter,eliminate)
 
@@ -23,7 +23,6 @@ end
 % Compute the square root
 cos_factor=((cos(theta)).^2)./(parameter(1)^2);
 sin_factor=((sin(theta)).^2)./(parameter(2)^2);
-
 root= 1./(sqrt(cos_factor + sin_factor));
 
 % Compute the X and Y values
