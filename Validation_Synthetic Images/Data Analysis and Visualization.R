@@ -1,12 +1,12 @@
-# Script to process the data relative to the lysosomes research carry up with Vadim, Adan and Yasel.
-# Author: Yasel Garcés (88yasel@gmail.com)
+# Analysis and visualization of the results obtained through 
+# the simulation (see README).
 
-# Libraries
+# Load Libraries
 library(dplyr)
 library(ggplot2)
 library(cowplot)
 library(reshape2)
-############# Some functions ###############
+############# Functions ###############
 statisticBYcolumns<-function(data){
   dataMean<-c()
   dataVar<-c()
@@ -18,14 +18,12 @@ statisticBYcolumns<-function(data){
   }
   return(list(Mean=dataMean,Var=dataVar,Sd=dataSD))
 }
-
 ############################################
-
-# Change work directory
-dir<-'/home/yasel/Dropbox/VadimLisosomas/Generation_image_Micrsocopy/'
+# Set the work directory
+dir<-'/home/yasel/Data Science/Projects/Monitoring-Cytosolic-Fluorescent-Aggregates-in-Cells/Validation_Synthetic Images/Validation Results'
 setwd(dir)
-# Load the data relative to the Jaccard, Recall and Precision index. Also its load the information 
-# relative to the area and displacement estimation error.
+# Load the data relative to the Jaccard, Recall, Precision and the
+# area and center estimation error.
 Area<-read.csv('Area.csv',header = FALSE)
 Displacement<-read.csv('Displacement.csv',header = FALSE)
 Jaccard<-read.csv('Jaccard.csv',header = FALSE)
@@ -33,7 +31,7 @@ Precision<-read.csv('Precision.csv',header = FALSE)
 Recall<-read.csv('Recall.csv',header = FALSE)
 SNR<-read.csv('SNR.csv',header = FALSE)
 
-# Find rows different to zero
+# Find the rows different to zero
 index<-rowSums(SNR)!=0
 # Erase the rows == 0 in all dataset
 Area1<-Area[index,]
@@ -61,23 +59,29 @@ Resume<-data.frame(SNR_Mean=SNR$Mean,SNR_Var=SNR$Var,SNR_SD=SNR$Sd,
            Displacement_SD=Displacement$Sd)
 
 ############# Data visualization ###############
-pdf("AreaBoxplot.pdf",width = 4.5,height=4.5)
+# Error in the estimation of the area in relationship with the signal noise ratio
+# Uncomment to save the figure as a pdf
+#pdf("AreaBoxplot.pdf",width = 4.5,height=4.5)
 colnames(Area1)<-format(Resume$SNR_Mean, digits=2, nsmall=2)
 Area1<-Area1[c(20:1)]
 boxplot(Area1,notch = TRUE,outline = FALSE,col = "cyan",xlab="SNR (dB)",las=2,
         ylab=expression("Error of the area "(mu~m^2)),yaxt="n")
 axis(side=2,labels=seq(0.01,0.09,0.01),at=seq(0.01,0.09,0.01),las=2)
-dev.off()
-
-pdf("Displacement_Boxplot.pdf",width = 4.5,height=4.5)
+#dev.off()
+#--------------------------------------------------------------------------------
+# Error in the center displacement in relationship with the signal noise ratio
+# Uncomment to save the figure as a pdf
+#pdf("Displacement_Boxplot.pdf",width = 4.5,height=4.5)
 colnames(Displacement1)<-format(Resume$SNR_Mean, digits=2, nsmall=2)
 Displacement1<-Displacement1[c(20:1)]
 boxplot(Displacement1,notch = TRUE,outline = FALSE,col = "purple",
         xlab="SNR (dB)",las=2,
         ylab=expression("Error in the displacement "(mu~m)))
-dev.off()
-
-pdf("Area_Mean.pdf",width = 4.5,height=3.5)
+#dev.off()
+#--------------------------------------------------------------------------------
+# Area mean absolute error in relationship with the signal noise ratio
+# Uncomment to save the figure as a pdf
+#pdf("Area_Mean.pdf",width = 4.5,height=3.5)
 ggplot(data = Resume,aes(x=SNR_Mean,y = Area_Mean))+
   geom_line(size=1.5,colour="cyan")+
   geom_ribbon(aes(ymax = Area_Mean+Area_SD, 
@@ -86,9 +90,11 @@ ggplot(data = Resume,aes(x=SNR_Mean,y = Area_Mean))+
   scale_x_continuous("SNR (dB)",breaks = seq(from = -8, to = 4, by = 1))+
   scale_y_continuous(expression("Area mean absolute error "(mu~m^2)),
                      breaks = seq(0,0.08,by = 0.005),labels = seq(0,0.08,by = 0.005))
-dev.off()
-
-pdf("Displacement_Mean.pdf",width = 4.5,height=3.5)
+#dev.off()
+#--------------------------------------------------------------------------------
+# Displacement mean error in relationship with the signal noise ratio
+# Uncomment to save the figure as a pdf
+#pdf("Displacement_Mean.pdf",width = 4.5,height=3.5)
 ggplot(data = Resume,aes(x=SNR_Mean,y = Displacement_Mean))+
   geom_line(size=1.5,colour="purple")+
   geom_ribbon(aes(ymax = Displacement_Mean+Displacement_SD, 
@@ -97,15 +103,16 @@ ggplot(data = Resume,aes(x=SNR_Mean,y = Displacement_Mean))+
   scale_x_continuous("SNR (dB)",breaks = seq(from = -8, to = 4, by = 1))+
   scale_y_continuous(expression("Displacement mean error "(mu~m)),
                      breaks = seq(0,0.04,by = 0.005),labels = seq(0,0.04,by = 0.005))
-dev.off()
-
-#################
+#dev.off()
+#--------------------------------------------------------------------------------
+# Plot the Jaccard, Precision and Recall index in relationship with the SNR
+# Uncomment to save the figure as a pdf
 Indexs<-select(Resume,c(SNR_Mean,Jaccard_Mean,Precision_Mean,Recall_Mean))
 Indexs<-melt(Indexs,id=c("SNR_Mean"))
 Indexs$variable<-factor(Indexs$variable,levels = levels(Indexs$variable),
                         labels = c("Jaccard","Precision","Recall"))
 
-pdf("IndexValues.pdf",width = 4.5,height=3.5)
+#pdf("IndexValues.pdf",width = 4.5,height=3.5)
 ggplot(Indexs,aes(x = SNR_Mean,y = value,color=variable))+geom_line(size=1.5)+
   theme(legend.justification=c(1,0), legend.position=c(1,0),
         legend.text = element_text(size = 16),
@@ -113,4 +120,4 @@ ggplot(Indexs,aes(x = SNR_Mean,y = value,color=variable))+geom_line(size=1.5)+
   scale_y_continuous("Index Values",breaks = seq(0.7,1,by = 0.05),
                      labels = seq(0.7,1,by = 0.05))+
   scale_x_continuous(breaks = seq(-8,4,by=1))
-dev.off()
+#dev.off()
