@@ -1,4 +1,4 @@
-% For a specific cell, this function extracts the information about the
+% This function extracts the information about the
 % lysosomes that are in this cell.
 % INPUT:
 %     cell: image that contain a single cell to be analysed.

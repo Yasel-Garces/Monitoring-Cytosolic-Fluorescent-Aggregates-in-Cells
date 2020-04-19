@@ -1,4 +1,4 @@
-% This function is to generate ellipses using the parametric form and the
+% This function generate ellipses using the parametric form and the
 % polar angle. See
 % https://es.wikipedia.org/wiki/Elipse#En_coordenadas_polares for more
 % information.

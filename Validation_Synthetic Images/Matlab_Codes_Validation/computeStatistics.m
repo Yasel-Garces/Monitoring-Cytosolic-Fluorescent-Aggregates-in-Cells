@@ -1,4 +1,4 @@
-% Function to compute the area, perimeter and Centroid of all regions in a
+% Function to compute the area, perimeter and Centroid of all regions in an
 % image.
 % INPUT: 
 %    BW: Binary Image
