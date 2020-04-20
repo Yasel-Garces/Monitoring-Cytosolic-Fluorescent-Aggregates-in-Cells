@@ -19,7 +19,7 @@ This repository contains the following source codes and data:
 
 ## Author
 All these codes were developed by Yasel Garces (email: 88yasel@gmail.com,
-[LinkedIn] (https://www.linkedin.com/in/yasel-garces-suarez/)). Nevertheless, the microscopy images (not available in this repository), as well as the materials and methods used to generate these images, are property of the other authors of this research (Vadim Pérez Koldenkova, Tomoki Matsuda, Adán Guerrero, Takeharu Nagai). Please see the [publication](https://www.biorxiv.org/content/10.1101/177139v1.full) for details.
+[LinkedIn](https://www.linkedin.com/in/yasel-garces-suarez/)). Nevertheless, the microscopy images (not available in this repository), as well as the materials and methods used to generate these images, are property of the other authors of this research (Vadim Pérez Koldenkova, Tomoki Matsuda, Adán Guerrero, Takeharu Nagai). Please see the [publication](https://www.biorxiv.org/content/10.1101/177139v1.full) for details.
 
 ## License
 These codes are open access and are distributed under the licence:
