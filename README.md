@@ -8,7 +8,7 @@ Autophagy is an evolutionary conserved pathway, by which eukaryotic cells degrad
 ## Project Scope
 In this project we present the concept of an algorithm for a semi-automatic detection and segmentation in 2D fluorescence images of spot-like structures similar to those observed under induction of autophagy. By evaluating the algorithm on more than 20000 simulated images of cells containing a variable number of punctate structures of different sizes and different levels of applied noise, we demonstrate its high robustness of puncta detection, even on a high noise background. We further demonstrate this feature of our algorithm by testing it in experimental conditions of a high non-specific background signal. We conclude that our algorithm is a suitable tool to be tested in biologically-relevant contexts.
 
-The codes available in this repository are part of the publication named "_Concept and in-silico assessment of an algorithm for monitoring cytosolic fluorescent aggregates in cells_" that can be found it [here](https://www.biorxiv.org/content/10.1101/177139v1.full). 
+The codes available in this repository are part of the publication "_Concept and in-silico assessment of an algorithm for monitoring cytosolic fluorescent aggregates in cells_" that can be found it [here](https://www.biorxiv.org/content/10.1101/177139v1.full). 
 
 ## Files in the Repository
 This repository contains the following source codes and data:
@@ -19,7 +19,7 @@ This repository contains the following source codes and data:
 
 ## Author
 All these codes were developed by Yasel Garces (email: 88yasel@gmail.com,
-[LinkedIn](https://www.linkedin.com/in/yasel-garces-suarez/)). Nevertheless, the microscopy images (not available in this repository), as well as the materials and methods used to generate these images, are property of the other authors of this research (Vadim Pérez Koldenkova, Tomoki Matsuda, Adán Guerrero, Takeharu Nagai). Please see the [publication](https://www.biorxiv.org/content/10.1101/177139v1.full) for details.
+[LinkedIn](https://www.linkedin.com/in/yasel-garces-suarez/)). Other data (microscopy images, methods) from the associated publication are not part of the deposited package, and are subjected to copyright as specified in the original [publication](https://www.biorxiv.org/content/10.1101/177139v1.full) for details.
 
 ## License
 These codes are open access and are distributed under the licence:
